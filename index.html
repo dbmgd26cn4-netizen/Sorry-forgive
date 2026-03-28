@@ -6,52 +6,56 @@
 
 <style>
 body {
-  background: linear-gradient(135deg, #ffe4e9, #ffd6e0);
-  font-family: Arial, sans-serif;
+  margin: 0;
+  height: 100vh;
+  background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+  font-family: 'Poppins', sans-serif;
   text-align: center;
   overflow: hidden;
-  height: 100vh;
+  color: white;
 }
 
+/* aesthetic glow text */
 h1 {
-  color: #ff4d6d;
   margin-top: 120px;
-  font-size: 2em;
-  min-height: 60px;
+  font-size: 2.2em;
+  text-shadow: 0 0 10px rgba(255,255,255,0.7);
 }
 
+/* buttons */
 button {
-  font-size: 1.4em;
+  font-size: 1.3em;
   padding: 12px 25px;
-  margin: 10px;
+  margin: 12px;
   border: none;
-  border-radius: 10px;
+  border-radius: 25px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 .yes-btn {
-  background-color: #4caf50;
-  color: white;
+  background: linear-gradient(45deg, #00ff87, #60efff);
+  color: black;
 }
 
 .no-btn {
-  background-color: #ff4d4d;
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
   color: white;
   position: absolute;
 }
 
+/* message */
 #message {
   margin-top: 20px;
-  font-size: 1.5em;
-  color: #ff4d6d;
+  font-size: 1.6em;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
 }
 
-/* floating emojis */
-.emoji {
+/* floating hearts */
+.heart {
   position: absolute;
-  font-size: 24px;
-  animation: floatUp 5s linear infinite;
+  font-size: 20px;
+  animation: floatUp 4s linear infinite;
 }
 
 @keyframes floatUp {
@@ -65,24 +69,23 @@ button {
   }
 }
 
-/* hearts burst */
-.heart {
+/* glowing circle bg */
+.glow {
   position: absolute;
-  color: red;
-  font-size: 20px;
-  animation: burst 1s ease-out forwards;
-}
-
-@keyframes burst {
-  to {
-    transform: translateY(-150px) scale(1.5);
-    opacity: 0;
-  }
+  width: 300px;
+  height: 300px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+  filter: blur(100px);
+  top: 20%;
+  left: 30%;
 }
 </style>
 </head>
 
 <body>
+
+<div class="glow"></div>
 
 <h1 id="typing"></h1>
 
@@ -92,10 +95,10 @@ button {
 <p id="message"></p>
 
 <script>
-const text = "I’m really sorry Miss Fine Shyt... please forgive me 🥺❤️";
-
+const text = "Pookie Bear... I’m really sorry 🥺❤️ please forgive me";
 let i = 0;
 
+// typing effect
 function typeEffect() {
   if (i < text.length) {
     document.getElementById("typing").innerHTML += text.charAt(i);
@@ -105,7 +108,7 @@ function typeEffect() {
 }
 typeEffect();
 
-// moving button
+// moving NO button
 function moveButton() {
   const button = document.querySelector('.no-btn');
   const x = Math.random() * window.innerWidth * 0.8;
@@ -114,36 +117,21 @@ function moveButton() {
   button.style.top = `${y}px`;
 }
 
-// yes click
+// YES click
 function sayYes() {
   document.getElementById("message").innerText =
-    "Thank you Miss Fine Shyt 🥺❤️ I promise I’ll make it right";
+    "I love you Pookie Bear 🥺❤️ "It won’t happen again Pookie Bear 🥺❤️ I love you 😘";
 
-  // hearts burst
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 25; i++) {
     let heart = document.createElement("div");
-    heart.innerHTML = "❤️";
+    heart.innerHTML = "💖";
     heart.className = "heart";
-    heart.style.left = (window.innerWidth / 2) + "px";
-    heart.style.top = (window.innerHeight / 2) + "px";
+    heart.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(heart);
 
-    setTimeout(() => heart.remove(), 1000);
+    setTimeout(() => heart.remove(), 4000);
   }
 }
-
-// floating sad emojis
-function createEmoji() {
-  const emoji = document.createElement("div");
-  emoji.className = "emoji";
-  emoji.innerHTML = "🥺";
-  emoji.style.left = Math.random() * 100 + "vw";
-  document.body.appendChild(emoji);
-
-  setTimeout(() => emoji.remove(), 5000);
-}
-
-setInterval(createEmoji, 800);
 </script>
 
 </body>
