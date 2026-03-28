@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sorry 💔</title>
+
+<style>
+body {
+  background: linear-gradient(135deg, #ffe4e9, #ffd6e0);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  overflow: hidden;
+  height: 100vh;
+}
+
+h1 {
+  color: #ff4d6d;
+  margin-top: 120px;
+  font-size: 2em;
+  min-height: 60px;
+}
+
+button {
+  font-size: 1.4em;
+  padding: 12px 25px;
+  margin: 10px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.yes-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+.no-btn {
+  background-color: #ff4d4d;
+  color: white;
+  position: absolute;
+}
+
+#message {
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: #ff4d6d;
+}
+
+/* floating emojis */
+.emoji {
+  position: absolute;
+  font-size: 24px;
+  animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+
+/* hearts burst */
+.heart {
+  position: absolute;
+  color: red;
+  font-size: 20px;
+  animation: burst 1s ease-out forwards;
+}
+
+@keyframes burst {
+  to {
+    transform: translateY(-150px) scale(1.5);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="typing"></h1>
+
+<button class="yes-btn" onclick="sayYes()">Forgive Me ❤️</button>
+<button class="no-btn" onmouseover="moveButton()">Still Angry 😢</button>
+
+<p id="message"></p>
+
+<script>
+const text = "I’m really sorry... please forgive me 🥺";
+let i = 0;
+
+function typeEffect() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 50);
+  }
+}
+typeEffect();
+
+// moving button
+function moveButton() {
+  const button = document.querySelector('.no-btn');
+  const x = Math.random() * window.innerWidth * 0.8;
+  const y = Math.random() * window.innerHeight * 0.8;
+  button.style.left = `${x}px`;
+  button.style.top = `${y}px`;
+}
+
+// yes click
+function sayYes() {
+  document.getElementById("message").innerText =
+    "Thank you 🥺❤️ I promise I’ll make it right";
+
+  // hearts burst
+  for (let i = 0; i < 20; i++) {
+    let heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.className = "heart";
+    heart.style.left = (window.innerWidth / 2) + "px";
+    heart.style.top = (window.innerHeight / 2) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 1000);
+  }
+}
+
+// floating sad emojis
+function createEmoji() {
+  const emoji = document.createElement("div");
+  emoji.className = "emoji";
+  emoji.innerHTML = "🥺";
+  emoji.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(emoji);
+
+  setTimeout(() => emoji.remove(), 5000);
+}
+
+setInterval(createEmoji, 800);
+</script>
+
+</body>
+</html>
