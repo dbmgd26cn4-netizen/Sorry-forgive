@@ -15,40 +15,7 @@ body {
   color: white;
 }
 
-/* images */
-.pic {
-  width: 220px;
-  border-radius: 20px;
-  margin-top: 20px;
-  box-shadow: 0 0 25px rgba(255,255,255,0.7);
-  position: relative;
-  z-index: 1;
-}
-
-/* buttons fix */
-button {
-  font-size: 1.3em;
-  padding: 12px 25px;
-  margin: 12px;
-  border: none;
-  border-radius: 25px;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-}
-
-.yes-btn {
-  background: linear-gradient(45deg, #00ff87, #60efff);
-  color: black;
-}
-
-.no-btn {
-  background: linear-gradient(45deg, #ff416c, #ff4b2b);
-  color: white;
-  position: absolute;
-}
-
-/* intro */
+/* intro screen */
 .intro {
   position: fixed;
   width: 100%;
@@ -85,6 +52,41 @@ button {
   margin-top: 10px;
 }
 
+/* images */
+.pic {
+  width: 220px;
+  border-radius: 20px;
+  margin-top: 20px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.7);
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: none; /* prevents blocking buttons */
+}
+
+/* buttons */
+button {
+  font-size: 1.3em;
+  padding: 12px 25px;
+  margin: 12px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  position: relative;
+  z-index: 5;
+}
+
+.yes-btn {
+  background: linear-gradient(45deg, #00ff87, #60efff);
+  color: black;
+}
+
+.no-btn {
+  background: linear-gradient(45deg, #ff416c, #ff4b2b);
+  color: white;
+  position: absolute;
+}
+
 /* message */
 #message {
   margin-top: 20px;
@@ -118,7 +120,7 @@ button {
 <!-- FIRST IMAGE -->
 <img id="firstImage" src="IMG_3632.jpeg" class="pic">
 
-<!-- SECOND IMAGE (hidden) -->
+<!-- SECOND IMAGE (hidden initially) -->
 <img id="secondImage" src="IMG_3673.jpeg" class="pic" style="display: none;">
 
 <br>
@@ -145,7 +147,7 @@ function sayYes() {
   document.getElementById("firstImage").style.display = "none";
   document.getElementById("secondImage").style.display = "block";
 
-  // hearts
+  // hearts animation
   for (let i = 0; i < 40; i++) {
     let heart = document.createElement("div");
     heart.innerHTML = "💖";
