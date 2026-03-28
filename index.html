@@ -9,13 +9,13 @@ body {
   margin: 0;
   height: 100vh;
   background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, sans-serif;
   text-align: center;
   overflow: hidden;
   color: white;
 }
 
-/* intro screen */
+/* intro */
 .intro {
   position: fixed;
   width: 100%;
@@ -34,7 +34,7 @@ body {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* glow name */
+/* text */
 .glow-name {
   font-size: 2.8em;
   margin-top: 120px;
@@ -46,10 +46,8 @@ body {
   to { text-shadow: 0 0 20px #fff, 0 0 40px #ff4d6d; }
 }
 
-/* text */
 .text {
   font-size: 1.5em;
-  margin-top: 10px;
 }
 
 /* images */
@@ -58,10 +56,7 @@ body {
   border-radius: 20px;
   margin-top: 20px;
   box-shadow: 0 0 25px rgba(255,255,255,0.7);
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  pointer-events: none; /* prevents blocking buttons */
+  pointer-events: none;
 }
 
 /* buttons */
@@ -104,6 +99,43 @@ button {
   from { transform: translateY(100vh); opacity: 1; }
   to { transform: translateY(-10vh); opacity: 0; }
 }
+
+/* confetti */
+@keyframes fall {
+  from { transform: translateY(-10vh); }
+  to { transform: translateY(100vh); }
+}
+
+/* LOVE SCREEN */
+#loveScreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 3em;
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transition: 1s;
+}
+
+#loveScreen.show {
+  opacity: 1;
+  visibility: visible;
+  animation: zoomIn 1s ease;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 </style>
 </head>
 
@@ -120,7 +152,7 @@ button {
 <!-- FIRST IMAGE -->
 <img id="firstImage" src="IMG_3632.jpeg" class="pic">
 
-<!-- SECOND IMAGE (hidden initially) -->
+<!-- SECOND IMAGE -->
 <img id="secondImage" src="IMG_3673.jpeg" class="pic" style="display: none;">
 
 <br>
@@ -129,6 +161,11 @@ button {
 <button class="no-btn" onmouseover="moveButton()">Still Angry 😢</button>
 
 <p id="message"></p>
+
+<!-- FULL SCREEN LOVE -->
+<div id="loveScreen">
+  I LOVE YOU 💖<br>Pookie Bear 🥺
+</div>
 
 <script>
 function moveButton() {
@@ -147,16 +184,35 @@ function sayYes() {
   document.getElementById("firstImage").style.display = "none";
   document.getElementById("secondImage").style.display = "block";
 
-  // hearts animation
+  // background change
+  document.body.style.background = "linear-gradient(135deg, #ff9a9e, #fad0c4)";
+
+  // hearts
   for (let i = 0; i < 40; i++) {
     let heart = document.createElement("div");
     heart.innerHTML = "💖";
     heart.className = "heart";
     heart.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(heart);
-
     setTimeout(() => heart.remove(), 4000);
   }
+
+  // confetti
+  for (let i = 0; i < 30; i++) {
+    let c = document.createElement("div");
+    c.innerHTML = "✨";
+    c.style.position = "absolute";
+    c.style.left = Math.random() * 100 + "vw";
+    c.style.top = "0";
+    c.style.animation = "fall 3s linear";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3000);
+  }
+
+  // show love screen
+  setTimeout(() => {
+    document.getElementById("loveScreen").classList.add("show");
+  }, 2000);
 }
 </script>
 
