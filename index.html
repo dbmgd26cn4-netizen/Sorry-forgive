@@ -19,6 +19,13 @@ body {
   border-radius: 20px;
   margin-top: 20px;
   box-shadow: 0 0 25px rgba(255,255,255,0.7);
+  position: relative;
+  z-index: 1;
+}
+
+button {
+  position: relative;
+  z-index: 2;
 }
 /* REEL INTRO SCREEN */
 .intro {
@@ -125,8 +132,9 @@ button {
 <!-- MAIN CONTENT -->
 <h1 class="glow-name">Pookie Bear 💖</h1>
 <div class="text">I’m really sorry 🥺❤️<br>please forgive me</div>
-<img src="IMG_3632.jpeg" class="pic">
-  <img src="IMG_3673.jpeg" class="pic" style="display: block;"
+<img id="firstImage" src="IMG_3632.jpeg" class="pic">
+
+<img id="secondImage" src="IMG_3673.jpeg" class="pic" style="display: none;">
 <button class="yes-btn" onclick="sayYes()">Forgive Me ❤️</button>
 <button class="no-btn" onmouseover="moveButton()">Still Angry 😢</button>
 
@@ -162,19 +170,7 @@ function sayYes() {
     setTimeout(() => heart.remove(), 4000);
   }
 }
-  document.getElementById("message").innerText =
-    "It won’t happen again Pookie Bear 🥺❤️ I love you 😘";
-
-  for (let i = 0; i < 40; i++) {
-    let heart = document.createElement("div");
-    heart.innerHTML = "💖";
-    heart.className = "heart";
-    heart.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(heart);
-
-    setTimeout(() => heart.remove(), 4000);
-  }
-}
+  
 </script>
 
 </body>
